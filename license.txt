@@ -1,5 +1,8 @@
-A template to build a Library for the Processing programming environment.
+SQuelized Processing Library:
+Copyright 2020 Samuel Alarco Cantos
 
+
+Processing Library template files:
 Part of the Processing project - http://processing.org
 
 Copyright 2011-2018 Elie Zananiri
