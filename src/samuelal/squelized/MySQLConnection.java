@@ -42,4 +42,9 @@ public class MySQLConnection extends SQLConnection {
 		}
 		return connection;
 	}
+
+	@Override
+	protected DatabaseType getDatabaseType() {
+		return DatabaseType.MYSQL;
+	}
 }

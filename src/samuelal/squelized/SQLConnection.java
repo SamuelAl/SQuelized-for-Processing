@@ -38,6 +38,8 @@ public abstract class SQLConnection{
 	
 	protected abstract Connection getSQLConnection();
 	
+	protected abstract DatabaseType getDatabaseType();
+	
 	public Table runQuery(String query)
 	{
 		Table queryResult = new Table();
@@ -78,7 +80,13 @@ public abstract class SQLConnection{
 						break;
 						// Type Date
 					case Types.DATE:
-						String parsedDate = dateFormat.format(results.getDate(columnTitle).toLocalDate());
+						String parsedDate = "";
+						if (getDatabaseType() == DatabaseType.SQLITE) {
+							parsedDate = results.getString(columnTitle);
+						}
+						else {
+							parsedDate = dateFormat.format(results.getDate(columnTitle).toLocalDate());
+						}
 						newRow.setString(columnTitle, parsedDate);
 						break;
 						// Type Time
