@@ -78,7 +78,7 @@ public abstract class SQLConnection{
 					case Types.LONGVARCHAR:
 						newRow.setString(columnTitle, results.getString(columnTitle));
 						break;
-						// Type Date
+					// Type Date
 					case Types.DATE:
 						String parsedDate = "";
 						if (getDatabaseType() == DatabaseType.SQLITE) {
@@ -89,33 +89,45 @@ public abstract class SQLConnection{
 						}
 						newRow.setString(columnTitle, parsedDate);
 						break;
-						// Type Time
+					// Type Time
 					case Types.TIME:
 					case Types.TIME_WITH_TIMEZONE:
-						String parsedTime = timestampFormat.format(results.getTime(columnTitle).toLocalTime());
+						String parsedTime = "";
+						if (getDatabaseType() == DatabaseType.SQLITE) {
+							parsedTime = results.getString(columnTitle);
+						}
+						else { 
+							parsedTime = timestampFormat.format(results.getTime(columnTitle).toLocalTime());
+						}
 						newRow.setString(columnTitle, parsedTime);
-						// Type Timestamps
+					// Type Time stamps
 					case Types.TIMESTAMP:
 					case Types.TIMESTAMP_WITH_TIMEZONE:
-						String parsedTimeStamp = timestampFormat.format(results.getTimestamp(columnTitle).toLocalDateTime());
+						String parsedTimeStamp = "";
+						if (getDatabaseType() == DatabaseType.SQLITE) {
+							parsedTimeStamp = results.getString(columnTitle);
+						}
+						else {
+							parsedTimeStamp = timestampFormat.format(results.getTimestamp(columnTitle).toLocalDateTime());
+						}
 						newRow.setString(columnTitle, parsedTimeStamp);
 						break;
-						// Type float
+					// Type float
 					case Types.FLOAT:
 					case Types.REAL:
 						newRow.setFloat(columnTitle, results.getFloat(columnTitle));
 						break;
-						// Type double
+					// Type double
 					case Types.DOUBLE:
 						newRow.setDouble(columnTitle, results.getDouble(columnTitle));
 						break;
-						// Type int
+					// Type int
 					case Types.INTEGER:
 					case Types.SMALLINT:
 					case Types.TINYINT:
 						newRow.setInt(columnTitle, results.getInt(columnTitle));
 						break;
-						// Type long
+					// Type long
 					case Types.BIGINT:
 						newRow.setLong(columnTitle, results.getLong(columnTitle));
 						break;
