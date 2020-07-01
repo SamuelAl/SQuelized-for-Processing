@@ -1,41 +1,26 @@
 package samuelal.squelized;
 
-import processing.core.*;
-import processing.data.Table;
-import processing.data.TableRow;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.Statement;
-import java.sql.Types;
-import java.time.format.*;
-import java.time.LocalDate;
 
+public class MySQLConnection extends SQLConnection {
 
-
-public class MySQLConnection{
-
-	public final static String VERSION = "##library.prettyVersion##";
-	private String url, user, password;
-	private Connection connection;
-
+	
 	/**
 	 * a Constructor, usually called in the setup() 
 	 * 
 	 * 
 	 */
 	public MySQLConnection(String user, String password, String url) {
-		welcome();
-		this.user = user;
-		this.password = password;
-		this.url = url;
+		super.welcome();
+		super.user = user;
+		super.password = password;
+		super.url = url;
 
 		//Try connection parameters
 		try {
-			connection = DriverManager.getConnection(url, user, password);
+			Connection connection = getSQLConnection();
 			System.out.println("Connected as " + user + " to " + url);
 			connection.close();
 		}
@@ -45,115 +30,16 @@ public class MySQLConnection{
 		}
 	}
 
-
-	private void welcome() {
-		System.out.println("##library.name## ##library.prettyVersion## by ##author##");
-	}
-
-	
-	/*
-	 * runs SQL query through connection
-	 * and returns Table object with results
-	 * 
-	 * @param	String
-	 * @return	Table
-	 */
-	
-	public Table runQuery(String query)
-	{
-		Table queryResult = new Table();
+	protected Connection getSQLConnection() {
+		Connection connection = null;
 		try {
-			Connection connection = DriverManager.getConnection(url, user, password);
-			Statement statement = connection.createStatement();
-			ResultSet results = statement.executeQuery(query);
-
-			//Build results table
-			ResultSetMetaData resultsMetaData = results.getMetaData();
-			int columnCount = resultsMetaData.getColumnCount();
-			for (int i= 1; i <= columnCount; i++) {
-			
-				String columnTitle = resultsMetaData.getColumnName(i);          
-				queryResult.addColumn(columnTitle);
-			}
-
-			// Date format to be used
-			// In the future should add functionality to specify data format.
-			DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			DateTimeFormatter  timestampFormat = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-			while (results.next()) {
-			
-				TableRow newRow = queryResult.addRow();
-				for (int i = 0; i < columnCount; i++) {
-				
-					String columnTitle = resultsMetaData.getColumnName(i + 1);
-					int typeNumber = resultsMetaData.getColumnType(i + 1);
-					switch(typeNumber)
-					{
-					// Type String
-					case Types.VARCHAR:
-					case Types.NVARCHAR:
-					case Types.CHAR:
-					case Types.NCHAR:
-					case Types.LONGVARCHAR:
-						newRow.setString(columnTitle, results.getString(columnTitle));
-						break;
-						// Type Date
-					case Types.DATE:
-						String parsedDate = dateFormat.format(results.getDate(columnTitle).toLocalDate());
-						newRow.setString(columnTitle, parsedDate);
-						break;
-						// Type Time
-					case Types.TIME:
-					case Types.TIME_WITH_TIMEZONE:
-						String parsedTime = timestampFormat.format(results.getTime(columnTitle).toLocalTime());
-						newRow.setString(columnTitle, parsedTime);
-						// Type Timestamps
-					case Types.TIMESTAMP:
-					case Types.TIMESTAMP_WITH_TIMEZONE:
-						String parsedTimeStamp = timestampFormat.format(results.getTimestamp(columnTitle).toLocalDateTime());
-						newRow.setString(columnTitle, parsedTimeStamp);
-						break;
-						// Type float
-					case Types.FLOAT:
-					case Types.REAL:
-						newRow.setFloat(columnTitle, results.getFloat(columnTitle));
-						break;
-						// Type double
-					case Types.DOUBLE:
-						newRow.setDouble(columnTitle, results.getDouble(columnTitle));
-						break;
-						// Type int
-					case Types.INTEGER:
-					case Types.SMALLINT:
-					case Types.TINYINT:
-						newRow.setInt(columnTitle, results.getInt(columnTitle));
-						break;
-						// Type long
-					case Types.BIGINT:
-						newRow.setLong(columnTitle, results.getLong(columnTitle));
-						break;
-					default:
-						newRow.setString(columnTitle, results.getString(columnTitle));
-						break;
-					}
-				}
-			}
+			connection = DriverManager.getConnection(super.url, super.user, super.password);
+			if (connection.equals(null)) {System.out.println("Null connection");}
 		}
 		catch (SQLException e) {
 			System.out.println("Connection failed");
 			System.out.println(e.getMessage());
-		} 
-		return queryResult;
+		}
+		return connection;
 	}
-
-	/**
-	 * return the version of the Library.
-	 * 
-	 * @return String
-	 */
-	public static String version() {
-		return VERSION;
-	}
-
 }
-
