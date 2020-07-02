@@ -6,11 +6,11 @@ import java.sql.SQLException;
 
 public class SQLiteConnection extends SQLConnection {
 
+	protected String url = "";
 
 	public SQLiteConnection (String url) {
-		super.url = url;
-		super.user = "";
-		super.password = "";
+
+		this.url = url;
 
 		//Try connection parameters
 		try {
@@ -28,7 +28,7 @@ public class SQLiteConnection extends SQLConnection {
 	protected Connection getSQLConnection() {
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(super.url);
+			connection = DriverManager.getConnection(url);
 			if (connection.equals(null)) {System.out.println("Null connection");}
 		}
 		catch (SQLException e) {

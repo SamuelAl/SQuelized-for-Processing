@@ -12,6 +12,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.sql.Types;
 import java.time.format.*;
+import java.util.Properties;
 import java.time.LocalDate;
 
 
@@ -19,14 +20,17 @@ import java.time.LocalDate;
 public abstract class SQLConnection{
 
 	public final static String VERSION = "##library.prettyVersion##";
-	protected String url;
-	protected String user;
-	protected String password;
+
 
 	protected void welcome() {
 		System.out.println("##library.name## ##library.prettyVersion## by ##author##");
 	}
 
+	
+	protected abstract Connection getSQLConnection();
+	
+	protected abstract DatabaseType getDatabaseType();
+	
 	
 	/*
 	 * runs SQL query through connection
@@ -35,11 +39,6 @@ public abstract class SQLConnection{
 	 * @param	String
 	 * @return	Table
 	 */
-	
-	protected abstract Connection getSQLConnection();
-	
-	protected abstract DatabaseType getDatabaseType();
-	
 	public Table runQuery(String query)
 	{
 		Table queryResult = new Table();
@@ -137,6 +136,8 @@ public abstract class SQLConnection{
 					}
 				}
 			}
+			statement.close();
+			connection.close();
 		}
 		catch (SQLException e) {
 			System.out.println("Connection failed");
@@ -145,6 +146,9 @@ public abstract class SQLConnection{
 		return queryResult;
 	}
 
+	
+	
+	
 	/**
 	 * return the version of the Library.
 	 * 
