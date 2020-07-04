@@ -32,7 +32,7 @@ public abstract class SQLConnection{
 	protected abstract DatabaseType getDatabaseType();
 	
 	
-	/*
+	/**
 	 * runs SQL query through connection
 	 * and returns Table object with results
 	 * 
@@ -146,8 +146,6 @@ public abstract class SQLConnection{
 		return queryResult;
 	}
 
-	
-	
 	
 	/**
 	 * return the version of the Library.
