@@ -3,7 +3,6 @@ package samuelal.squelized;
 import processing.core.*;
 import processing.data.Table;
 import processing.data.TableRow;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -145,7 +144,21 @@ public abstract class SQLConnection{
 		} 
 		return queryResult;
 	}
-
+	
+	
+	public Table getTable(String tableName) {
+		return runQuery(QueryBuilder.displayAllTableRecords(tableName));
+	}
+	
+	public Table getColumn(String tableName, String columnName) {
+		return getColumns(tableName, new String[] {columnName});
+	}
+	
+	
+	public Table getColumns(String tableName, String[] columnNames) {
+		return runQuery(QueryBuilder.displayRecords(tableName, columnNames));
+	}
+	
 	
 	/**
 	 * return the version of the Library.
