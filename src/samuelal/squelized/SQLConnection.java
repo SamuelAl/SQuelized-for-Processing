@@ -35,8 +35,8 @@ public abstract class SQLConnection{
 	 * runs SQL query through connection
 	 * and returns Table object with results
 	 * 
-	 * @param	String
-	 * @return	Table
+	 * @param	String 	query
+	 * @return	Table	results
 	 */
 	public Table runQuery(String query)
 	{
@@ -145,16 +145,35 @@ public abstract class SQLConnection{
 		return queryResult;
 	}
 	
-	
+	/**
+	 * gets all the data of a table and
+	 * generates a Processing Table with it
+	 * 
+	 * @param String	tableName
+	 * @return Table	results
+	 */
 	public Table getTable(String tableName) {
 		return runQuery(QueryBuilder.displayAllTableRecords(tableName));
 	}
 	
+	/**
+	 * gets all the data in a specific table column
+	 * and generates Processing Table 
+	 * 
+	 * @param tableName
+	 * @param columnName
+	 * @return	Table	results
+	 */
 	public Table getColumn(String tableName, String columnName) {
 		return getColumns(tableName, new String[] {columnName});
 	}
 	
-	
+	/**
+	 * 
+	 * @param String	tableName
+	 * @param String[]	columnNames
+	 * @return	Table	results
+	 */
 	public Table getColumns(String tableName, String[] columnNames) {
 		return runQuery(QueryBuilder.displayRecords(tableName, columnNames));
 	}

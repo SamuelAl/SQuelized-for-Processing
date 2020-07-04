@@ -27,6 +27,8 @@ public class QueryBuilder {
 	
 	public static String createTable(String tableName, String[] columnNames, int[] columnTypes, Integer[] columnLength) {
 		
+		loadSQLBuilderSchema();
+		
 		// Specify table name
 		DbTable newTable = dbSchema.addTable(tableName);
 		
