@@ -25,6 +25,16 @@ public class QueryBuilder {
 		dbSchema = dbSpecs.addDefaultSchema();
 	}
 	
+	/**
+	 * Generates query to create new table in
+	 * database
+	 * 
+	 * @param tableName
+	 * @param columnNames
+	 * @param columnTypes
+	 * @param columnLength
+	 * @return query string
+	 */
 	public static String createTable(String tableName, String[] columnNames, int[] columnTypes, Integer[] columnLength) {
 		
 		loadSQLBuilderSchema();
@@ -41,6 +51,15 @@ public class QueryBuilder {
 		return query;
 	}
 	
+	/**
+	 * Generates query to insert a single row of 
+	 * data into specified columns.
+	 * 
+	 * @param tableName
+	 * @param columns
+	 * @param data
+	 * @return query string
+	 */
 	public static String insertData(String tableName, String[] columns, Object[] data) {
 		
 		InsertQuery insertQuery = new InsertQuery(tableName).addCustomColumns(columns, data);
@@ -51,6 +70,13 @@ public class QueryBuilder {
 		
 	}
 	
+	/**
+	 * Generates query to display all records
+	 * in a specified table.
+	 * 
+	 * @param tableName
+	 * @return query string
+	 */
 	public static String displayAllTableRecords(String tableName) {
 		
 		SelectQuery selectQuery = new SelectQuery().addCustomFromTable(tableName).addAllColumns();
@@ -60,6 +86,14 @@ public class QueryBuilder {
 		return query;
 	}
 	
+	/**
+	 * Generates query to display records from specific
+	 * columns in specified table.
+	 * 
+	 * @param tableName
+	 * @param columns
+	 * @return query string
+	 */
 	public static String displayRecords(String tableName, String[] columns) {
 		
 		SelectQuery selectQuery = new SelectQuery().addCustomFromTable(tableName);
@@ -75,6 +109,17 @@ public class QueryBuilder {
 		return query;	
 	}
 	
+	/**
+	 * Generates query to display records from specific
+	 * columns in specifed table, ordering results according
+	 * to contents of specific column
+	 * 
+	 * @param tableName
+	 * @param columns
+	 * @param orderColumn
+	 * @param ascending
+	 * @return query string
+	 */
 	public static String displayRecords(String tableName, String[] columns, String orderColumn, boolean ascending) {
 		
 		SelectQuery selectQuery = new SelectQuery().addCustomFromTable(tableName);

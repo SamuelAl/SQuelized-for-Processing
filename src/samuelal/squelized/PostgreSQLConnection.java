@@ -13,7 +13,7 @@ public class PostgreSQLConnection extends SQLConnection {
 	/**
 	 * Constructor with full url
 	 * 
-	 * @param String url
+	 * @param url
 	 */
 	public PostgreSQLConnection(String url) {
 		super.welcome();
@@ -28,7 +28,7 @@ public class PostgreSQLConnection extends SQLConnection {
 	/**
 	 * Constructor with url and pre-made Properties object
 	 * 
-	 * @param String url
+	 * @param url
 	 * @param Properties props
 	 */
 	public PostgreSQLConnection(String url, Properties props) {
@@ -44,9 +44,9 @@ public class PostgreSQLConnection extends SQLConnection {
 	/**
 	 * Constructor taking in user, password, and url strings
 	 * 
-	 * @param String user
-	 * @param String password
-	 * @param String url
+	 * @param user
+	 * @param password
+	 * @param url
 	 */
 	public PostgreSQLConnection(String user, String password, String url) {
 		
