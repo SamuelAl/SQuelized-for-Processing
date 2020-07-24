@@ -11,8 +11,11 @@ import com.healthmarketscience.sqlbuilder.dbspec.basic.DbSchema;
 import com.healthmarketscience.sqlbuilder.dbspec.basic.DbSpec;
 import com.healthmarketscience.sqlbuilder.dbspec.basic.DbTable;
 
-/* Helper class to support CRUD database operations
+/** 
+ * Helper class to support CRUD database operations
  * using SqlQueryBuilder library
+ * 
+ * @author Samuel Alarco Cantos
  */
 public class QueryBuilder {
 	

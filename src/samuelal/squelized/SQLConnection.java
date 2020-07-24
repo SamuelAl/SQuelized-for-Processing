@@ -15,7 +15,15 @@ import java.util.Properties;
 import java.time.LocalDate;
 
 
-
+/**
+ * Main class that represents and abstract SQL database
+ * connection.
+ * Allows for connection functionality to a variety of SQL
+ * servers plus basic query creation functionality.
+ * 
+ * @author Samuel Alarco Cantos
+ *
+ */
 public abstract class SQLConnection{
 
 	public final static String VERSION = "##library.prettyVersion##";
@@ -32,7 +40,7 @@ public abstract class SQLConnection{
 	
 	
 	/**
-	 * runs SQL query through connection
+	 * Runs SQL query through connection
 	 * and returns Table object with results
 	 * 
 	 * @param query
@@ -146,7 +154,7 @@ public abstract class SQLConnection{
 	}
 	
 	/**
-	 * gets all the data of a table and
+	 * Gets all the data of a table and
 	 * generates a Processing Table with it
 	 * 
 	 * @param tableName
@@ -157,7 +165,7 @@ public abstract class SQLConnection{
 	}
 	
 	/**
-	 * gets all the data in a specific table column
+	 * Gets all the data in a specific table column
 	 * and generates Processing Table 
 	 * 
 	 * @param tableName
@@ -169,7 +177,7 @@ public abstract class SQLConnection{
 	}
 	
 	/**
-	 * gets all the date of a table's specified columns
+	 * Gets all the date of a table's specified columns
 	 * and generates Processing Table
 	 * 
 	 * @param tableName
@@ -193,7 +201,7 @@ public abstract class SQLConnection{
 	}
 	
 	/**
-	 * return the version of the Library.
+	 * Return the version of the Library.
 	 * 
 	 * @return VERSION
 	 */

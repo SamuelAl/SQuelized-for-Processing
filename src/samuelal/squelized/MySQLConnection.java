@@ -5,6 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Represents connection to a MySQL database.
+ * Extends SQLConnection.
+ * 
+ * @author Samuel Alarco Cantos
+ *
+ */
 public class MySQLConnection extends SQLConnection {
 
 	protected Properties props;
@@ -13,9 +20,9 @@ public class MySQLConnection extends SQLConnection {
 	/**
 	 * Constructor taking in user, password, and url strings
 	 * 
-	 * @param String user
-	 * @param String password
-	 * @param String url
+	 * @param user
+	 * @param assword
+	 * @param url
 	 */
 	public MySQLConnection(String user, String password, String url) {
 		
@@ -34,7 +41,7 @@ public class MySQLConnection extends SQLConnection {
 	/**
 	 * Constructor with full url
 	 * 
-	 * @param String url
+	 * @param url
 	 */
 	public MySQLConnection(String url) {
 		super.welcome();
@@ -48,7 +55,7 @@ public class MySQLConnection extends SQLConnection {
 	/**
 	 * Constructor with url and pre-made Properties object
 	 * 
-	 * @param String url
+	 * @param url
 	 * @param Properties props
 	 */
 	public MySQLConnection(String url, Properties props) {

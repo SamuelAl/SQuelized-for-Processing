@@ -4,6 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Represents connection to SQLite database.
+ * Extends SQLConnection.
+ * 
+ * @author Samuel Alarco Cantos
+ *
+ */
 public class SQLiteConnection extends SQLConnection {
 
 	protected String url = "";
@@ -11,7 +18,7 @@ public class SQLiteConnection extends SQLConnection {
 	/**
 	 * Constructor with full url
 	 * 
-	 * @param String url
+	 * @param url
 	 */
 	public SQLiteConnection (String url) {
 
