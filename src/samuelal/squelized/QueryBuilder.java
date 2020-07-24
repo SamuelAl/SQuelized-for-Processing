@@ -65,10 +65,12 @@ public class QueryBuilder {
 		SelectQuery selectQuery = new SelectQuery().addCustomFromTable(tableName);
 		
 		for (String column : columns) {
-			selectQuery.addCustomColumns(column);
+			selectQuery.addCustomColumns(new CustomSql(column));
 		}
 		
 		String query = selectQuery.validate().toString();
+		
+		System.out.println(query);
 		
 		return query;	
 	}
@@ -78,7 +80,7 @@ public class QueryBuilder {
 		SelectQuery selectQuery = new SelectQuery().addCustomFromTable(tableName);
 		
 		for (String column : columns) {
-			selectQuery.addCustomColumns(column);
+			selectQuery.addCustomColumns(new CustomSql(column));
 		}
 		
 		selectQuery.addCustomOrdering(orderColumn, ascending ? Dir.ASCENDING : Dir.DESCENDING);

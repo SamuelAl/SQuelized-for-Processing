@@ -4,25 +4,34 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Properties;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 class SQLConnectionTest {
-
-	@Test
-	void testGetSQLConnection() {
-		Properties mySqlProps = new Properties();
+	
+	Properties mySqlProps;
+	Properties postGreSQLProps;
+	public SQLConnectionTest() {
+		mySqlProps = new Properties();
 		mySqlProps.setProperty("user", "root");
 		mySqlProps.setProperty("password", "1234");
 		mySqlProps.setProperty("useUnicode", "true");
 		mySqlProps.setProperty("useJDBCCompliantTimezoneShift", "true");
 		mySqlProps.setProperty("useLegacyDatetimecode", "true");
 		mySqlProps.setProperty("serverTimezone", "UTC");
+	}
+
+	@Test
+	void testGetSQLConnection() {
 		SQLConnection mysql = new MySQLConnection("jdbc:mysql://localhost:3306/squelized_test", mySqlProps);
 	}
 
 	@Test
 	void testGetDatabaseType() {
-		fail("Not yet implemented"); // TODO
+		SQLConnection mySQL = new MySQLConnection("jdbc:mysql://localhost:3306/squelized_test", mySqlProps);
+		Assert.assertEquals(DatabaseType.MYSQL, mySQL.getDatabaseType());
+		SQLConnection sqlLite = new SQLiteConnection("jdbc:sqlite:E:/Personal Projects/SQuelized/chinook/chinook.db");
+		Assert.assertEquals(DatabaseType.SQLITE, sqlLite.getDatabaseType());
 	}
 
 	@Test

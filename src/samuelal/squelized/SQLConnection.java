@@ -35,8 +35,8 @@ public abstract class SQLConnection{
 	 * runs SQL query through connection
 	 * and returns Table object with results
 	 * 
-	 * @param	String 	query
-	 * @return	Table	results
+	 * @param query
+	 * @return results
 	 */
 	public Table runQuery(String query)
 	{
@@ -149,8 +149,8 @@ public abstract class SQLConnection{
 	 * gets all the data of a table and
 	 * generates a Processing Table with it
 	 * 
-	 * @param String	tableName
-	 * @return Table	results
+	 * @param tableName
+	 * @return results
 	 */
 	public Table getTable(String tableName) {
 		return runQuery(QueryBuilder.displayAllTableRecords(tableName));
@@ -162,27 +162,40 @@ public abstract class SQLConnection{
 	 * 
 	 * @param tableName
 	 * @param columnName
-	 * @return	Table	results
+	 * @return results
 	 */
 	public Table getColumn(String tableName, String columnName) {
 		return getColumns(tableName, new String[] {columnName});
 	}
 	
 	/**
+	 * gets all the date of a table's specified columns
+	 * and generates Processing Table
 	 * 
-	 * @param String	tableName
-	 * @param String[]	columnNames
-	 * @return	Table	results
+	 * @param tableName
+	 * @param columnNames
+	 * @return results
 	 */
 	public Table getColumns(String tableName, String[] columnNames) {
 		return runQuery(QueryBuilder.displayRecords(tableName, columnNames));
 	}
 	
+	/**
+	 * Inserts values into specified columns
+	 * (inserts only one row)
+	 * 
+	 * @param tableName
+	 * @param columnNames
+	 * @param data
+	 */
+	public void insertIntoColumns(String tableName, String[] columnNames, Object[] data) {
+		runQuery(QueryBuilder.insertData(tableName, columnNames, data));
+	}
 	
 	/**
 	 * return the version of the Library.
 	 * 
-	 * @return String
+	 * @return VERSION
 	 */
 	public static String version() {
 		return VERSION;
