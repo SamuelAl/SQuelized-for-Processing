@@ -43,7 +43,7 @@ public abstract class SQLConnection{
 	 * Runs SQL query through connection
 	 * and returns Table object with results
 	 * 
-	 * @param query
+	 * @param query	(String) Query to be executed in database
 	 * @return results
 	 */
 	public Table runQuery(String query)
@@ -157,7 +157,7 @@ public abstract class SQLConnection{
 	 * Gets all the data of a table and
 	 * generates a Processing Table with it
 	 * 
-	 * @param tableName
+	 * @param tableName (String) Name of the table to display
 	 * @return results
 	 */
 	public Table getTable(String tableName) {
@@ -168,8 +168,8 @@ public abstract class SQLConnection{
 	 * Gets all the data in a specific table column
 	 * and generates Processing Table 
 	 * 
-	 * @param tableName
-	 * @param columnName
+	 * @param tableName (String) Name of the table to display
+	 * @param columnName (String) Name of column to extract data from
 	 * @return results
 	 */
 	public Table getColumn(String tableName, String columnName) {
@@ -180,8 +180,8 @@ public abstract class SQLConnection{
 	 * Gets all the date of a table's specified columns
 	 * and generates Processing Table
 	 * 
-	 * @param tableName
-	 * @param columnNames
+	 * @param tableName (String) Name of the table to display
+	 * @param columnNames (String[]) Array containing names of the columns to extract data from
 	 * @return results
 	 */
 	public Table getColumns(String tableName, String[] columnNames) {
@@ -192,9 +192,9 @@ public abstract class SQLConnection{
 	 * Inserts values into specified columns
 	 * (inserts only one row)
 	 * 
-	 * @param tableName
-	 * @param columnNames
-	 * @param data
+	 * @param tableName (String) Name of the table to insert into
+	 * @param columnNames (String[]) Array containing the columns into which insert data (same order as corresponding element)
+	 * @param data (Object[]) Array containing data objects to insert into respective columns (same order as columns)
 	 */
 	public void insertIntoColumns(String tableName, String[] columnNames, Object[] data) {
 		runQuery(QueryBuilder.insertData(tableName, columnNames, data));
