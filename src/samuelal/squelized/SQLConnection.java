@@ -41,7 +41,8 @@ public abstract class SQLConnection{
 	
 	/**
 	 * Runs SQL query through connection
-	 * and returns Table object with results
+	 * and returns Table object with results.
+	 * Cannot be used to run Update Queries.
 	 * 
 	 * @param query	(String) Query to be executed in database
 	 * @return results
@@ -152,6 +153,23 @@ public abstract class SQLConnection{
 		} 
 		return queryResult;
 	}
+
+	/**
+	 * Runs an Update SQL query through connection
+	 * 
+	 * @param query	(String) Update Query to be executed in database
+	 */
+	public void updateQuery(String query) {
+		try {
+			Connection connection = getSQLConnection();
+			Statement statement = connection.createStatement();
+			statement.executeUpdate(query);
+		}
+		catch (SQLException e) {
+			System.out.println("Connection failed");
+			System.out.println(e.getMessage());
+		} 
+	}
 	
 	/**
 	 * Gets all the data of a table and
@@ -197,7 +215,7 @@ public abstract class SQLConnection{
 	 * @param data (Object[]) Array containing data objects to insert into respective columns (same order as columns)
 	 */
 	public void insertIntoColumns(String tableName, String[] columnNames, Object[] data) {
-		runQuery(QueryBuilder.insertData(tableName, columnNames, data));
+		updateQuery(QueryBuilder.insertData(tableName, columnNames, data));
 	}
 	
 	/**
