@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"samuelal.squelized","l":"DatabaseType"},{"p":"samuelal.squelized","l":"MySQLConnection"},{"p":"samuelal.squelized","l":"PostgreSQLConnection"},{"p":"samuelal.squelized","l":"QueryBuilder"},{"p":"samuelal.squelized","l":"SQLConnection"},{"p":"samuelal.squelized","l":"SQLiteConnection"}]
